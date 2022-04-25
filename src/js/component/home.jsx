@@ -1,26 +1,42 @@
 import React from "react";
+import Boton from "./boton.jsx";
+import { useState } from "react";
+import Contador from "./contador.jsx";
 
 //include images into your bundle
-import rigoImage from "../../img/rigo-baby.jpg";
+import rigoImage from "../../img/4geeks.png";
 
 //create your first component
-const Home = () => {
+function Home() {
+	const [numClic, setNumClic] = useState(0);
+
+	const manejarClic = () => {
+		setNumClic(numClic + 1);
+	};
+	const reiniciarContador = () => {
+		setNumClic(0);
+	};
+
 	return (
-		<div>
-			<h1 className="text-center mt-5">Hello Rigo!</h1>
-			<p>
-				<img src={rigoImage} />
-			</p>
-			<a href="#" className="btn btn-success">
-				If you see this green button... bootstrap is working...
-			</a>
-			<p>
-				Made by{" "}
-				<a href="http://www.4geeksacademy.com">4Geeks Academy</a>, with
-				love!
-			</p>
+		<div className="App">
+			<div className="logo">
+				<img className="logo-A" src={rigoImage} alt="logo" />
+			</div>
+			<div className="contenedor-1">
+				<Contador numClic={numClic} />
+				<Boton
+					texto="Clic"
+					esBotonDeClic={true}
+					manejarClic={manejarClic}
+				/>
+				<Boton
+					texto="Reiniciar"
+					esBotonDeClic={false}
+					manejarClic={reiniciarContador}
+				/>
+			</div>
 		</div>
 	);
-};
+}
 
 export default Home;
